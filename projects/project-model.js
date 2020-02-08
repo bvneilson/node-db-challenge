@@ -15,6 +15,15 @@ function addProject(project) {
 function getProjects() {
   return db('projects');
 }
+function getProjectById(projectId) {
+  return db.select(
+    'projects.*',
+    'tasks.*'
+  )
+  .where("projects.id", projectId)
+  .from('projects')
+  .innerJoin('tasks', 'projects.id', 'tasks.project_id');
+}
 
 function addTask(task) {
   return db('tasks').insert(task);
@@ -29,5 +38,6 @@ module.exports = {
   addProject,
   getProjects,
   addTask,
-  getTasks
+  getTasks,
+  getProjectById
 }

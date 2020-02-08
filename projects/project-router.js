@@ -36,6 +36,15 @@ router.get('/projects', (req, res) => {
   })
 })
 
+router.get('/projects/:id', (req, res) => {
+  const { id } = req.params;
+  Projects.getProjectById(id).then(response => {
+    res.status(200).json(response);
+  }).catch(err => {
+    res.status(404).json({message: err});
+  })
+})
+
 router.post('/tasks', (req, res) => {
   Projects.addTask(req.body).then(response => {
     res.status(200).json(response);
