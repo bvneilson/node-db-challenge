@@ -6,7 +6,7 @@ exports.up = function(knex) {
       tbl.text('name', 128)
         .notNullable();
       tbl.text('description', 128);
-      tbl.boolean('completed');
+      tbl.boolean('completed').defaultTo(false);
     })
     .createTable('tasks', tbl => {
       tbl.increments();
@@ -18,13 +18,14 @@ exports.up = function(knex) {
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       tbl.text('description', 128)
-        .notNullable();;
+        .notNullable();
       tbl.text('notes', 128);
-      tbl.boolean('completed');
+      tbl.boolean('completed').defaultTo(false);
     })
     .createTable('resources', tbl => {
       tbl.increments();
       tbl.text('name', 128)
+        .unique()
         .notNullable();
       tbl.text('description', 128);
     });
